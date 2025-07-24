@@ -273,10 +273,11 @@
         localStorage.removeItem('selectedCountryCode')
         document.getElementById('translateBtn').disabled = true
       })
-
+      let reviewCount = 0
       const myAzureLanguageKey =
-        'yourAzureKey'
+        'yourKey'
 
+      // available langagues at https://api.cognitive.microsofttranslator.com/languages?api-version=3.0&scope=translation
       const countryCodeToLanguage = {
         USA: 'en',
         FRA: 'fr',
@@ -288,8 +289,6 @@
         IND: 'hi',
         BRA: 'pt'
       }
-
-      let reviewCount = 0
 
       async function analyzeSentiment() {
         const userText = document.getElementById('userInput').value
@@ -309,6 +308,7 @@
         )
 
         const results = (await response.json()).documents[0]
+        console.log(results)
         document.getElementById(
           'sentiment'
         ).textContent = `Overall sentiment: ${results.sentiment}`
@@ -326,9 +326,9 @@
 
         const responses = {
           positive:
-            "😃 Glad you enjoyed it! I'll tailor future suggestions to similar items.",
+            "😃 Glad you enjoyed it! I'll tailor future suggestions to similar experiences.",
           negative:
-            "😟 Sorry to hear that! I'll exclude similar items from future suggestions.",
+            "😟 Sorry to hear that! I'll exclude similar experiences from future suggestions.",
           neutral:
             "👌 OK! I'll refine future suggestions to improve your experience."
         }
@@ -417,7 +417,7 @@
             method: 'POST',
             headers: {
               'Ocp-Apim-Subscription-Key':
-                'yourAzureTranslateKey',
+                'yourTranslateKe',
               'Ocp-Apim-Subscription-Region': 'eastus',
               'Content-Type': 'application/json'
             },
